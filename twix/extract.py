@@ -20,7 +20,7 @@ root_path = os.path.abspath(os.path.join(current_path, os.pardir))
 sys.path.append(root_path)
 from twix.model import model 
 
-model_name = 'gpt-4o'
+model_name = 'gpt_41_mini_azure'
 vision_model_name = 'vision-' + model_name 
 total_cost = 0
 
@@ -297,7 +297,7 @@ def extract_phrase_one_doc(pdf_path, text_path, dict_path, page_limit):
 
     return adjusted_phrases, phrases
 
-def extract_phrase(data_files, result_folder, LLM_model_name = 'gpt-4o-mini', page_to_infer_fields = 5, vision_feature = False):
+def extract_phrase(data_files, result_folder, LLM_model_name = model_name, page_to_infer_fields = 5, vision_feature = False):
     print('Phrase extraction starts...')
     global model_name
     if len(LLM_model_name) > 0:
@@ -432,6 +432,7 @@ def extract_words(path, page_indices=list(range(5)), page_annot=True):
                 word['page'] = page_index+1
                 word['size'] = (word['x1']-word['x0'])/len(word['text'])
         words.extend(page_words)
+        print('Extracting page', page_index)
     return words
 
 def get_phrases_manual(words, x_thresh = 6, y_thresh=4):

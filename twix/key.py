@@ -7,7 +7,7 @@ import tiktoken
 root_path = extract.get_root_path()
 sys.path.append(root_path)
 from twix.model import model 
-model_name = 'gpt-4o'
+model_name = 'gpt_41_mini_azure'
 vision_model_name = 'vision-' + model_name 
 total_cost = 0
 
@@ -344,6 +344,7 @@ def get_extracted_result_path(result_folder, data_file):#file path is the path o
 
     # Construct the new file path with the desired suffix and extension
     new_file_path = os.path.join(result_folder, f"{file_name}_extracted.json")
+    #new_file_path_bb = os.path.join(result_folder, f"{file_name}_extracted_bb.json")
     return new_file_path
 
 def get_page_number(raw_phrases_bb):
@@ -352,7 +353,7 @@ def get_page_number(raw_phrases_bb):
         pages.append(pb['page'])
     return len(set(pages))
 
-def predict_field(data_files, result_folder, LLM_model_name = 'gpt-4o-mini'):
+def predict_field(data_files, result_folder, LLM_model_name = model_name):
     global model_name
     if len(LLM_model_name) > 0:
         model_name = LLM_model_name 
@@ -402,13 +403,14 @@ def predict_field(data_files, result_folder, LLM_model_name = 'gpt-4o-mini'):
     #write result
     result_path = get_key_path(result_folder)
     #print(result_path)
+    
     write_result(result_path,fields)
 
     return fields, total_cost
 
 if __name__ == "__main__":
     pdf_paths = []
-    file_name = '2972_2972574'
+    file_name = 'Test Case 1 - 3 pages'
     file_path = '/tests/data/' + file_name + '.pdf'
     pdf_paths.append(root_path + file_path) 
     result_path = root_path + '/tests/out/' + file_name + 'test/' 

@@ -5,7 +5,7 @@ root_path = extract.get_root_path()
 sys.path.append(root_path)
 from twix.model import model 
 from gurobipy import Model, GRB
-model_name = 'gpt-4o'
+model_name = 'gpt_5_mini_azure'
 vision_model_name = 'vision-' + model_name 
 total_cost = 0
 metadata_rows = []
@@ -551,8 +551,8 @@ def extract_data_per_doc(template, phrases_bb, out_path, metadata):
     #seperate records based on template 
     print("Record seperation starts...")
     complete_row_mp = seperate_rows(phrases_bb)
-    # print('row representations:')
-    # print_row(complete_row_mp)
+    print('row representations:')
+    print_row(complete_row_mp)
 
     records = record_seperation(template, complete_row_mp)
     print('Totally ' + str(len(records)) + ' records...')
@@ -564,6 +564,9 @@ def extract_data_per_doc(template, phrases_bb, out_path, metadata):
     #data extraction within each data block based on template 
     print('Data extraction starts...')
     extraction_objects = data_extraction(records, blocks, complete_row_mp, template)
+
+    #print('Extraction objects...', extraction_objects)
+    print('Writing extraction objects to...', out_path)
     write_json(extraction_objects, out_path)
 
     return extraction_objects
@@ -1547,7 +1550,7 @@ def write_string(result_path, content):
         file.write(content)
 
 
-def predict_template(data_files, result_folder, LLM_model_name = 'gpt-4o-mini'):
+def predict_template(data_files, result_folder, LLM_model_name = 'gpt_41_mini_azure'):
     global model_name
     if len(LLM_model_name) > 0:
         model_name = LLM_model_name 
@@ -1653,6 +1656,7 @@ def extract_data(data_files, result_folder, template = []):
     for data_file in data_files:
         file_name = extract.get_file_name(data_file)
         phrase_path = result_folder + file_name + '_raw_phrases_bounding_box_page_number.txt'  
+        print(phrase_path)
         out_path = key.get_extracted_result_path(result_folder, data_file)
         phrases_bb = csv_2_tuple_list(phrase_path)#phrases with bounding boxes
         extraction_object = extract_data_per_doc(template, phrases_bb, out_path, metadata)
@@ -1662,9 +1666,9 @@ def extract_data(data_files, result_folder, template = []):
 
 if __name__ == "__main__":
     pdf_paths = []
-    file_name = 'Investigations_Redacted_modified'
+    file_name = 'law_case_1/Expugement Intake_Anessa_Redacted'
     file_path = '/tests/data/' + file_name + '.pdf'
     pdf_paths.append(root_path + file_path) 
-    result_path = root_path + '/tests/out/' + file_name + '/' 
+    result_path = root_path + '/tests/out/' + 'law_case_1' + '/' 
     extract_data(pdf_paths, result_path) 
     
