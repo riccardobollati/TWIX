@@ -1,0 +1,19 @@
+{
+  "doc_name": "Final_Disposition_Report_2015_-_2021_Redacted",
+  "stage": "stage1",
+  "model": "claude-opus-4-7",
+  "status": "ok",
+  "ok": true,
+  "errors": [],
+  "output_path": "/Users/yiminglin/Documents/Codebase/twix2.0/results/Final_Disposition_Report_2015_-_2021_Redacted__opus-4-7.json",
+  "calls": [
+    {
+      "ok": true,
+      "duration_ms": 234661,
+      "input_tokens": 12,
+      "output_tokens": 25098,
+      "cache_read": 93004,
+      "cache_creation": 50627
+    }
+  ]
+}

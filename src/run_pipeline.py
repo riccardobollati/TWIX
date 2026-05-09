@@ -299,6 +299,25 @@ def run_all_samples():
     }
     documents = []
     for pdf in pdfs:
+        doc_name = _safe_doc_name(pdf)
+        paths = _result_paths(doc_name)
+        if Path(paths["eval_json"]).exists():
+            _print(f"[all-samples] {pdf.name}: skipping (eval.json exists)")
+            eval_data = json.loads(Path(paths["eval_json"]).read_text(encoding="utf-8"))
+            accuracy = float(eval_data.get("accuracy", 0.0))
+            documents.append({
+                "doc_name": doc_name,
+                "stage1_status": "ok",
+                "stage2_status": "passed" if accuracy >= THRESHOLD else "below_threshold",
+                "stage2_iterations_used": 0,
+                "stage2_best_accuracy": accuracy,
+                "stage2_threshold": THRESHOLD,
+                "stage2_max_iters": MAX_ITERS,
+                "stage3_accuracy": accuracy,
+                "files": paths,
+                "skipped": True,
+            })
+            continue
         try:
             entry = run_all(pdf, session_state=session_state)
         except Exception as e:
