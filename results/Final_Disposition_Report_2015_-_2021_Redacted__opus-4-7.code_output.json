@@ -1,6 +1,6 @@
 {
   "doc_name": "Final_Disposition_Report_2015_-_2021_Redacted",
-  "model": "claude-opus-4-7",
+  "model": "code-extractor",
   "sampled_pages": 5,
   "records": [
     {
@@ -104,11 +104,11 @@
             },
             {
               "key": "Officer",
-              "value": "Mathew Young"
+              "value": "Mathew"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "Young"
             }
           ],
           "relationship": {
@@ -273,11 +273,11 @@
             },
             {
               "key": "Officer",
-              "value": "Rachel Beuttler"
+              "value": "Rachel"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "Beuttler"
             }
           ],
           "relationship": {
@@ -460,11 +460,11 @@
             },
             {
               "key": "Officer",
-              "value": "Anthony Garcia"
+              "value": "Anthony"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "Garcia"
             }
           ],
           "relationship": {
@@ -611,11 +611,11 @@
             },
             {
               "key": "Officer",
-              "value": "Kevin McArthur"
+              "value": "Kevin"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "McArthur"
             }
           ],
           "relationship": {
@@ -968,11 +968,11 @@
             },
             {
               "key": "Officer",
-              "value": "Jesse Alvarez"
+              "value": "Jesse"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "Alvarez"
             }
           ],
           "relationship": {
@@ -1289,11 +1289,11 @@
             },
             {
               "key": "Officer",
-              "value": "John Lawrence"
+              "value": "John"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "Lawrence"
             }
           ],
           "relationship": {
@@ -1441,11 +1441,11 @@
             },
             {
               "key": "Officer",
-              "value": "Matthew Donatoni(not W/SPD)"
+              "value": "Matthew W/SPD)"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "Donatoni(not"
             }
           ],
           "relationship": {
@@ -1646,11 +1646,11 @@
             },
             {
               "key": "Officer",
-              "value": "Daniel Robison"
+              "value": "Daniel"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "Robison"
             }
           ],
           "relationship": {
@@ -1887,11 +1887,11 @@
             },
             {
               "key": "Officer",
-              "value": "Matthew Costa"
+              "value": "Matthew"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "Costa"
             }
           ],
           "relationship": {
@@ -2226,11 +2226,11 @@
             },
             {
               "key": "Officer",
-              "value": "Matthew Doughty"
+              "value": "Matthew"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "Doughty"
             }
           ],
           "relationship": {
@@ -2529,11 +2529,11 @@
             },
             {
               "key": "Officer",
-              "value": "Christopher Neff"
+              "value": "Christopher"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "Neff"
             }
           ],
           "relationship": {
@@ -2680,11 +2680,11 @@
             },
             {
               "key": "Officer",
-              "value": "Mario Villarreal"
+              "value": "Mario"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "Villarreal"
             }
           ],
           "relationship": {
@@ -2850,11 +2850,11 @@
             },
             {
               "key": "Officer",
-              "value": "Gabriel Suarez"
+              "value": "Gabriel"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "Suarez"
             }
           ],
           "relationship": {
@@ -3189,11 +3189,11 @@
             },
             {
               "key": "Officer",
-              "value": "Jacqueline (RETIRED) Bohn"
+              "value": "Jacqueline Bohn"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "(RETIRED)"
             }
           ],
           "relationship": {
@@ -3341,11 +3341,11 @@
             },
             {
               "key": "Officer",
-              "value": "Dominic Mercurio"
+              "value": "Dominic"
             },
             {
               "key": "SSN",
-              "value": ""
+              "value": "Mercurio"
             }
           ],
           "relationship": {
