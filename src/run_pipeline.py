@@ -301,23 +301,26 @@ def run_all_samples():
     for pdf in pdfs:
         doc_name = _safe_doc_name(pdf)
         paths = _result_paths(doc_name)
-        if Path(paths["eval_json"]).exists():
-            _print(f"[all-samples] {pdf.name}: skipping (eval.json exists)")
-            eval_data = json.loads(Path(paths["eval_json"]).read_text(encoding="utf-8"))
+        eval_path = Path(paths["eval_json"])
+        extractor_path = Path(paths["extractor_py"])
+        if eval_path.exists() and extractor_path.exists():
+            eval_data = json.loads(eval_path.read_text(encoding="utf-8"))
             accuracy = float(eval_data.get("accuracy", 0.0))
-            documents.append({
-                "doc_name": doc_name,
-                "stage1_status": "ok",
-                "stage2_status": "passed" if accuracy >= THRESHOLD else "below_threshold",
-                "stage2_iterations_used": 0,
-                "stage2_best_accuracy": accuracy,
-                "stage2_threshold": THRESHOLD,
-                "stage2_max_iters": MAX_ITERS,
-                "stage3_accuracy": accuracy,
-                "files": paths,
-                "skipped": True,
-            })
-            continue
+            if accuracy > 0.0:
+                _print(f"[all-samples] {pdf.name}: skipping (extractor.py + eval.json with accuracy={accuracy:.4f})")
+                documents.append({
+                    "doc_name": doc_name,
+                    "stage1_status": "ok",
+                    "stage2_status": "passed" if accuracy >= THRESHOLD else "below_threshold",
+                    "stage2_iterations_used": 0,
+                    "stage2_best_accuracy": accuracy,
+                    "stage2_threshold": THRESHOLD,
+                    "stage2_max_iters": MAX_ITERS,
+                    "stage3_accuracy": accuracy,
+                    "files": paths,
+                    "skipped": True,
+                })
+                continue
         try:
             entry = run_all(pdf, session_state=session_state)
         except Exception as e:
