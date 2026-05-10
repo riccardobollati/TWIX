@@ -41,7 +41,7 @@ RESULTS_DIR = ROOT / "results"
 TMP_DIR = ROOT / ".tmp_pipeline"
 
 THRESHOLD = 0.9
-MAX_ITERS = 25
+MAX_ITERS = 5
 RUN_TIMEOUT_S = 60
 N_PAGES = 5
 
@@ -398,6 +398,7 @@ def main():
     parser = argparse.ArgumentParser(description="twix2.0 extraction pipeline orchestrator")
     parser.add_argument("--threshold", type=float, default=None, help="Accuracy threshold (default: 0.9)")
     parser.add_argument("--n-pages",   type=int,   default=None, help="Pages to sample from PDF (default: 5)")
+    parser.add_argument("--max-iters", type=int,   default=None, help="Max codegen iterations (default: 5)")
     parser.add_argument("--tag",       type=str,   default=None, help="Result file suffix, e.g. opus-4-7-t98-p1 (default: opus-4-7)")
     sub = parser.add_subparsers(dest="cmd", required=True)
     for name in ("stage1", "stage2", "stage3", "all"):
@@ -407,11 +408,13 @@ def main():
     args = parser.parse_args()
 
     # Override module-level settings when flags are provided.
-    global THRESHOLD, N_PAGES, MODEL_SHORT
+    global THRESHOLD, N_PAGES, MAX_ITERS, MODEL_SHORT
     if args.threshold is not None:
         THRESHOLD = args.threshold
     if args.n_pages is not None:
         N_PAGES = args.n_pages
+    if args.max_iters is not None:
+        MAX_ITERS = args.max_iters
     if args.tag is not None:
         MODEL_SHORT = args.tag
 
