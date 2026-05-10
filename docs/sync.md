@@ -37,7 +37,7 @@ gcloud compute ssh doc-structure --zone=us-central1-a --project=doc-structure --
 
 **Pull latest code on server** (after pushing to `twix2.0`):
 ```bash
-gcloud compute ssh doc-structure --zone=us-central1-a --project=doc-structure --tunnel-through-iap --command="cd ~/TWIX && git pull origin twix2.0"
+gcloud compute ssh doc-structure --zone=us-central1-a --project=doc-structure --tunnel-through-iap --command="cd ~/twix2.0 && git pull origin twix2.0"
 ```
 
 **Run a script in background on server:**
