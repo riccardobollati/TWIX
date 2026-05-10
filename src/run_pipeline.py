@@ -43,6 +43,7 @@ TMP_DIR = ROOT / ".tmp_pipeline"
 THRESHOLD = 0.9
 MAX_ITERS = 25
 RUN_TIMEOUT_S = 60
+N_PAGES = 5
 
 
 def _safe_doc_name(pdf_path: Path) -> str:
@@ -94,7 +95,7 @@ def stage1(pdf_path: Path) -> tuple[StageOneResult, list[dict]]:
         model=MODEL,
         model_short=MODEL_SHORT,
         project_root=ROOT,
-        n_pages=5,
+        n_pages=N_PAGES,
         max_retries=3,
     )
     call_logs = []
@@ -395,12 +396,24 @@ def _build_log(timestamp: str, session_start: float, session_state: dict, docume
 
 def main():
     parser = argparse.ArgumentParser(description="twix2.0 extraction pipeline orchestrator")
+    parser.add_argument("--threshold", type=float, default=None, help="Accuracy threshold (default: 0.9)")
+    parser.add_argument("--n-pages",   type=int,   default=None, help="Pages to sample from PDF (default: 5)")
+    parser.add_argument("--tag",       type=str,   default=None, help="Result file suffix, e.g. opus-4-7-t98-p1 (default: opus-4-7)")
     sub = parser.add_subparsers(dest="cmd", required=True)
     for name in ("stage1", "stage2", "stage3", "all"):
         sp = sub.add_parser(name)
         sp.add_argument("pdf", help="Path to a PDF file")
     sub.add_parser("all-samples")
     args = parser.parse_args()
+
+    # Override module-level settings when flags are provided.
+    global THRESHOLD, N_PAGES, MODEL_SHORT
+    if args.threshold is not None:
+        THRESHOLD = args.threshold
+    if args.n_pages is not None:
+        N_PAGES = args.n_pages
+    if args.tag is not None:
+        MODEL_SHORT = args.tag
 
     if args.cmd == "stage1":
         stage1(Path(args.pdf).resolve())

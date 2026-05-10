@@ -229,7 +229,7 @@ def verify_doc(doc_name: str) -> Path:
 
 def _write(doc_name: str, lines: list[str]) -> Path:
     ANALYSIS_DIR.mkdir(parents=True, exist_ok=True)
-    out = ANALYSIS_DIR / f"{doc_name}__analysis.md"
+    out = ANALYSIS_DIR / f"{doc_name}__{MODEL_SHORT}__analysis.md"
     out.write_text("\n".join(lines), encoding="utf-8")
     return out
 
@@ -246,8 +246,18 @@ def list_sample_docs() -> list[str]:
 
 
 def main():
-    if len(sys.argv) > 1:
-        targets = [sys.argv[1]]
+    import argparse
+    parser = argparse.ArgumentParser(description="twix2.0 verifier")
+    parser.add_argument("doc_name", nargs="?", help="Specific doc name to verify (default: all sample docs)")
+    parser.add_argument("--tag", default=None, help="Result file tag/suffix (default: opus-4-7)")
+    args = parser.parse_args()
+
+    global MODEL_SHORT
+    if args.tag:
+        MODEL_SHORT = args.tag
+
+    if args.doc_name:
+        targets = [args.doc_name]
     else:
         targets = list_sample_docs()
         if not targets:
